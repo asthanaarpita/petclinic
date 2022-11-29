@@ -28,7 +28,7 @@ pipeline {
 		    steps {
 			    sh 'whoami'
 			    script {
-				    myimage = docker.build("sumanth17121988/petclinic:${env.BUILD_ID}")
+				    myimage = docker.build("asthanaarpita/petclinic:${env.BUILD_ID}")
 			    }
 		    }
 	    }
@@ -38,7 +38,7 @@ pipeline {
 			    script {
 				    echo "Push Docker Image"
 				    withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhub')]) {
-            				sh "docker login -u sumanth17121988 -p ${dockerhub}"
+            				sh "docker login -u arpitaasthana11 -p ${dockerhub}"
 				    }
 				        myimage.push("${env.BUILD_ID}")
 				    
