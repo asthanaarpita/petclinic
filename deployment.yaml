@@ -1,0 +1,38 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springweb
+  labels:
+    app: springweb
+spec:
+  selector:
+    matchLabels:
+      app: springweb
+  template:
+    metadata:
+      labels:
+        app: springweb
+    spec:
+      containers:
+        - name: springweb
+          image: sumanth17121988/petclinic:5
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: "springweb-service"
+  namespace: "default"
+  labels:
+    app: "springweb"
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    app: "springweb"
+  type: LoadBalancer
